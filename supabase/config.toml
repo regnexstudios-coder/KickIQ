@@ -1,0 +1,5 @@
+# Minimal Supabase CLI config. Run `supabase init` to regenerate a full file if needed.
+project_id = "kickiq"
+
+[functions.analyze-kick]
+verify_jwt = true
