@@ -76,7 +76,7 @@ create policy "challenge delete self" on public.challenge_entries for delete usi
 create policy "challenge read all" on public.challenge_entries for select using (auth.role() = 'authenticated');
 create policy "redemptions self" on public.referral_redemptions for all using (auth.uid() = redeemer_id) with check (auth.uid() = redeemer_id);
 
-create or replace view public.weekly_leaderboard as
+create or replace view public.weekly_leaderboard with (security_invoker = true) as
   select week_key, kick_type, display_name, max(score) as score
   from public.challenge_entries
   group by week_key, kick_type, display_name, user_id

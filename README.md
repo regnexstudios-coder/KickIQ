@@ -54,6 +54,17 @@ All client values are `EXPO_PUBLIC_*` (Expo inlines them at build time). Every i
 
 ## 3. Backend (Supabase)
 
+The production project already exists: **`kickiq`** (ref `tbelctibljtsejkvwrqn`, eu-west-1). The schema in
+`supabase/migrations/0001_init.sql` is applied and the `analyze-kick` Edge Function is deployed with JWT verification.
+`.env.example` carries the project URL, publishable key and function URL.
+
+Still manual (dashboard):
+1. **Authentication → Sign In / Providers → enable "Anonymous sign-ins"** (the app has no email/password flow).
+2. **Edge Functions → Secrets → add `GEMINI_API_KEY`** (and optionally `GEMINI_MODEL`). Until it is set the function
+   returns 500 "server not configured" and the app falls back to the mock coach.
+
+To recreate the backend elsewhere:
+
 ```bash
 supabase link --project-ref <ref>
 supabase db push                                   # applies supabase/migrations/0001_init.sql
