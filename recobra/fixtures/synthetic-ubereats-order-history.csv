@@ -1,0 +1,3 @@
+Order ID,Order Date,Subtotal,Items,Pickup Time,Order Status,Customer ID
+UE-1001,2026-10-03 13:05:00,"40,00",1x Burger Clasica; 2x Patatas,2026-10-03 13:22:00,Completed,cust-77
+UE-1002,2026-10-04 20:40:00,"25,00",1x Pizza Margarita,2026-10-04 20:58:00,Completed,cust-12

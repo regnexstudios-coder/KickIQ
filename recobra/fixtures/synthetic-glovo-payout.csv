@@ -1,0 +1,7 @@
+Concepto;Código de pedido;Fecha;Importe
+Pedido;GL-5001;09/10/2026;"32,40"
+Pedido con deducción;GL-5001;09/10/2026;"-14,80"
+Ajuste por reclamación del cliente;GL-5002;09/10/2026;"-6,00"
+Comisión de servicio;;09/10/2026;"-8,10"
+Abono compensación reclamación;GL-5001;23/10/2026;"14,80"
+Pedido con deducción;;09/10/2026;"-3,00"

@@ -1,0 +1,5 @@
+Informe de errores de pedidos;;;;;
+Periodo: octubre 2026;;;;;
+ID de pedido;Fecha del pedido;Tipo de error;Artículos;Importe reembolsado;ID de cliente
+UE-2001;03/10/2026 13:05;Artículo faltante;2x Burger Doble;"18,00";c-1
+UE-2002;04/10/2026 20:40;Artículo incorrecto;Pizza Cuatro Quesos x1;"11,50";c-2

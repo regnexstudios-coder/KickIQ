@@ -1,0 +1,5 @@
+Order ID,Payout Date,Transaction Type,Sales,Total Payout
+UE-1001,2026-10-09,Order,40.00,30.00
+UE-1001,2026-10-16,Order error adjustment (credit),,12.50
+UE-1002,2026-10-09,Order,25.00,19.00
+,2026-10-16,Delivery fee,,-3.00

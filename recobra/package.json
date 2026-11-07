@@ -1,0 +1,36 @@
+{
+  "name": "recobra",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "import": "tsx scripts/import.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
+    "exceljs": "^4.4.0",
+    "next": "^15.5.29",
+    "papaparse": "^5.7.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^3.4.19",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}

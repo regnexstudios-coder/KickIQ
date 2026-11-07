@@ -1,0 +1,8 @@
+Order ID,Order Date,Store,Error Type,Item(s),Refund Amount,Customer ID
+UE-1001,2026-10-03 13:05:00,Barcelona Centro,Missing Item,1x Burger Clasica; 2x Patatas,"12,50",cust-77
+UE-1002,2026-10-04 20:40:00,Barcelona Centro,Wrong Item,1x Pizza Margarita,9.90,cust-12
+UE-1003,2026-10-05 21:10:00,Barcelona Centro,Food Quality - cold,1x Pasta Carbonara,"1.234,56",cust-77
+UE-1004,2026-10-06 19:00:00,Barcelona Centro,Missing Item,1x Ensalada,not a number,cust-90
+,2026-10-06 19:30:00,Barcelona Centro,Missing Item,1x Ensalada,4.00,cust-91
+UE-1006,2026-10-07 12:00:00,Barcelona Centro,Late delivery,1x Menu Dia,0,cust-12
+UE-1007,garbage-date,Barcelona Centro,Missing Item,1x Cafe,2.50,cust-77
