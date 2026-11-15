@@ -29,3 +29,11 @@ npm run dev
 
 ## Free-tier limit
 Free plan = 3 saved quotes/month, enforced server-side via the `quotes_this_month()` SQL function. Over the limit the client still sees their estimate, but the lead isn't saved. `profiles.plan` is not editable by users (column grants); flip it to `pro` from your Lemon Squeezy webhook using the service role.
+
+## Billing (Lemon Squeezy, $9/mo Pro)
+1. Create a subscription product in Lemon Squeezy and put its checkout link in `NEXT_PUBLIC_LEMONSQUEEZY_CHECKOUT_URL`. The dashboard appends `checkout[email]` and `checkout[custom][user_id]` automatically.
+2. Add a webhook pointing to `https://YOUR_DOMAIN/api/webhooks/lemonsqueezy` with all `subscription_*` events, and set its signing secret as `LEMONSQUEEZY_WEBHOOK_SECRET`.
+3. Set `SUPABASE_SERVICE_ROLE_KEY` (server only). The webhook verifies the HMAC signature, then sets `profiles.plan`: `active`/`on_trial` -> `pro`; `expired`/`unpaid`/`paused` -> `free`; `cancelled` keeps Pro until it expires.
+
+## Tests
+`npm test` runs pricing-math and billing-signature unit tests.

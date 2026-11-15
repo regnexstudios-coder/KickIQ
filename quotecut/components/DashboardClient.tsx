@@ -6,6 +6,7 @@ import clsx from "clsx";
 import Logo from "./Logo";
 import RateCardForm from "./RateCardForm";
 import LeadsList from "./LeadsList";
+import { checkoutUrl } from "@/lib/billing";
 import { FREE_MONTHLY_LIMIT, type Profile, type Quote } from "@/lib/types";
 
 export default function DashboardClient({
@@ -37,12 +38,26 @@ export default function DashboardClient({
         </div>
       </header>
 
+      {current.plan === "pro" && (
+        <div className="mx-auto mb-4 max-w-2xl rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-sm text-accent">
+          Pro plan · unlimited quotes, no &lsquo;Powered by&rsquo; branding
+        </div>
+      )}
       {current.plan === "free" && (
         <div className="mx-auto mb-4 flex max-w-2xl items-center justify-between rounded-xl border border-line bg-card px-4 py-3 text-sm">
           <span className="text-zinc-400">
             Free plan · <span className="font-semibold text-zinc-200">{Math.min(monthCount, FREE_MONTHLY_LIMIT)}/{FREE_MONTHLY_LIMIT}</span> quotes this month
           </span>
-          {monthCount >= FREE_MONTHLY_LIMIT && <span className="text-xs font-medium text-amber-300">Limit reached — upgrade for unlimited</span>}
+          {process.env.NEXT_PUBLIC_LEMONSQUEEZY_CHECKOUT_URL ? (
+            <a
+              href={checkoutUrl(process.env.NEXT_PUBLIC_LEMONSQUEEZY_CHECKOUT_URL, current.id, email)}
+              className="btn-primary !px-3 !py-1.5 text-xs"
+            >
+              {monthCount >= FREE_MONTHLY_LIMIT ? "Limit reached — go Pro $9/mo" : "Upgrade to Pro"}
+            </a>
+          ) : (
+            monthCount >= FREE_MONTHLY_LIMIT && <span className="text-xs font-medium text-amber-300">Limit reached — Pro checkout coming soon</span>
+          )}
         </div>
       )}
 
