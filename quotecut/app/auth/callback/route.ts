@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   // only allow same-site relative redirects
   const next = nextParam.startsWith("/") && !nextParam.startsWith("//") ? nextParam : "/dashboard";
 
-  if (code) {
+  if (code && process.env.NEXT_PUBLIC_SUPABASE_URL) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) return NextResponse.redirect(`${origin}${next}`);

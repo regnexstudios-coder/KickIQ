@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import SetupNotice from "@/components/SetupNotice";
+import { hasSupabaseEnv } from "@/lib/env";
 import DashboardClient from "@/components/DashboardClient";
 import { DEFAULT_RATES, type Profile, type Quote } from "@/lib/types";
 
@@ -7,6 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Dashboard — QuoteCut" };
 
 export default async function DashboardPage() {
+  if (!hasSupabaseEnv()) return <SetupNotice />;
   const supabase = await createClient();
   const {
     data: { user },

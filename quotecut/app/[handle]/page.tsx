@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
+import SetupNotice from "@/components/SetupNotice";
+import { hasSupabaseEnv } from "@/lib/env";
 import Intake from "@/components/Intake";
 import { DEFAULT_RATES, type Profile } from "@/lib/types";
 import { money } from "@/lib/quote";
@@ -8,6 +10,7 @@ import { money } from "@/lib/quote";
 export const dynamic = "force-dynamic";
 
 async function getProfile(handle: string) {
+  if (!hasSupabaseEnv()) return null;
   const supabase = await createClient();
   const { data } = await supabase.from("profiles").select("*").eq("handle", handle.toLowerCase()).maybeSingle();
   return (data as Profile | null) ?? null;
@@ -25,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
 
 export default async function PublicIntakePage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = await params;
+  if (!hasSupabaseEnv()) return <SetupNotice />;
   const profile = await getProfile(handle);
   if (!profile) notFound();
 

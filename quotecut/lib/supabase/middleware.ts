@@ -1,8 +1,10 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { hasSupabaseEnv } from "../env";
 
 /** Refreshes the Supabase session cookie and guards /dashboard. */
 export async function updateSession(request: NextRequest) {
+  if (!hasSupabaseEnv()) return NextResponse.next({ request }); // pages render a setup notice
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

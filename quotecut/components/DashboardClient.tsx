@@ -24,7 +24,7 @@ export default function DashboardClient({
   const newCount = initialQuotes.filter((q) => q.status === "new").length;
 
   return (
-    <div className="mx-auto min-h-dvh max-w-2xl px-4 pb-16">
+    <div className="mx-auto min-h-dvh max-w-5xl px-4 pb-16">
       <header className="flex items-center justify-between py-5">
         <Logo href="/dashboard" />
         <div className="flex items-center gap-3">
@@ -38,7 +38,7 @@ export default function DashboardClient({
       </header>
 
       {current.plan === "free" && (
-        <div className="mb-4 flex items-center justify-between rounded-xl border border-line bg-card px-4 py-3 text-sm">
+        <div className="mx-auto mb-4 flex max-w-2xl items-center justify-between rounded-xl border border-line bg-card px-4 py-3 text-sm">
           <span className="text-zinc-400">
             Free plan · <span className="font-semibold text-zinc-200">{Math.min(monthCount, FREE_MONTHLY_LIMIT)}/{FREE_MONTHLY_LIMIT}</span> quotes this month
           </span>
@@ -46,7 +46,7 @@ export default function DashboardClient({
         </div>
       )}
 
-      <div className="mb-5 grid grid-cols-2 gap-1 rounded-xl border border-line bg-card p-1">
+      <div className="mx-auto mb-5 grid max-w-2xl grid-cols-2 gap-1 rounded-xl border border-line bg-card p-1">
         <TabBtn active={tab === "rates"} onClick={() => setTab("rates")} icon={<SlidersHorizontal size={16} />}>
           Rate Card &amp; Link
         </TabBtn>
@@ -58,7 +58,9 @@ export default function DashboardClient({
       {tab === "rates" ? (
         <RateCardForm profile={current} onSaved={(p) => setCurrent(p)} />
       ) : (
-        <LeadsList initial={initialQuotes} editorName={current.display_name || current.handle} hasHandle={!!current.handle} onSetup={() => setTab("rates")} />
+        <div className="mx-auto max-w-2xl">
+          <LeadsList initial={initialQuotes} editorName={current.display_name || current.handle} hasHandle={!!current.handle} onSetup={() => setTab("rates")} />
+        </div>
       )}
     </div>
   );

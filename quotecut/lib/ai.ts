@@ -87,7 +87,7 @@ export function heuristicScope(a: Answers): AIScope {
     return m ? Math.max(1, parseInt(m[1], 10)) : 1;
   };
   const wantsThumb = /thumb/.test(text);
-  const wantsLong = /(youtube|long[- ]?form|vlog|documentary|\b\d{2,3}\s?(min|minute))/.test(text);
+  const wantsLong = /(youtube|long[- ]?form|vlog|documentary)/.test(text);
   const wantsShort = /(reel|tiktok|short|clip|vertical|ig\b)/.test(text) || (!wantsThumb && !wantsLong);
   const qty = num(a.volume);
 

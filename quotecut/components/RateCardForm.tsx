@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check, ExternalLink, Loader2, PartyPopper } from "lucide-react";
 import CopyButton from "./CopyButton";
+import LivePreview from "./LivePreview";
 import { createClient } from "@/lib/supabase/client";
 import { HANDLE_RE, RESERVED_HANDLES, SITE_DOMAIN, type Profile, type Rates } from "@/lib/types";
 
@@ -73,7 +74,8 @@ export default function RateCardForm({ profile, onSaved }: { profile: Profile; o
   }
 
   return (
-    <form onSubmit={save} className="space-y-5">
+    <form onSubmit={save} className="lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start lg:gap-6">
+      <div className="space-y-5">
       {firstTime && (
         <div className="flex gap-3 rounded-xl border border-accent/40 bg-accent/10 p-4 text-sm">
           <PartyPopper className="mt-0.5 shrink-0 text-accent" size={18} />
@@ -165,6 +167,24 @@ export default function RateCardForm({ profile, onSaved }: { profile: Profile; o
         {saving ? <Loader2 className="animate-spin" size={16} /> : saved ? <Check size={16} /> : null}
         {saved ? "Saved!" : firstTime ? "Claim handle & go live" : "Save changes"}
       </button>
+      </div>
+
+      <aside className="mt-8 lg:sticky lg:top-6 lg:mt-0">
+        <LivePreview
+          name={displayName}
+          tagline={tagline}
+          handle={handle}
+          currency={currency}
+          notes={notes}
+          rates={{
+            short_form: Number(shortForm) || 0,
+            long_form: Number(longForm) || 0,
+            thumbnail: Number(thumb) || 0,
+            rush_multiplier: 1 + (Number(rushPct) || 0) / 100,
+            min_budget: Number(minBudget) || 0,
+          }}
+        />
+      </aside>
     </form>
   );
 }
