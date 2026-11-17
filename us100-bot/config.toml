@@ -1,0 +1,48 @@
+# US100 intraday bot configuration.
+# Every number here is a starting point, not a tuned value. Backtest before changing,
+# and backtest again after.
+
+[instrument]
+symbol = "MNQ"            # Micro E-mini Nasdaq-100 ($2/point). Use "NQ" for the $20/point contract.
+exchange = "CME"
+currency = "USD"
+multiplier = 2.0          # dollars per index point per contract (MNQ = 2, NQ = 20)
+tick_size = 0.25
+roll_days_before_expiry = 5   # skip a contract this close to expiry and use the next one
+
+[session]
+timezone = "America/New_York"
+rth_start = "09:30"       # only regular-session bars are used
+rth_end = "16:00"
+entry_start = "10:00"     # no new trades before this (lets the open settle)
+entry_end = "15:30"       # no new trades after this
+flatten_at = "15:55"      # everything is closed at this time, every day
+
+[strategy]
+bar_minutes = 5
+ema_fast = 20
+ema_slow = 50
+slope_lookback = 5        # slow EMA must be rising/falling over this many bars
+pullback_lookback = 3     # price must have touched the fast EMA within this many bars
+atr_period = 14
+atr_stop_mult = 1.5       # stop distance = this x ATR
+reward_risk = 2.0         # target distance = this x stop distance
+allow_shorts = true
+
+[risk]
+risk_per_trade_pct = 0.5  # % of account equity lost if the stop is hit
+max_contracts = 5
+max_trades_per_day = 3
+max_daily_loss_pct = 1.5  # stop trading for the day after losing this % of equity
+
+[backtest]
+starting_equity = 25000.0
+slippage_ticks = 1        # per market fill (entries, stops, end-of-day exits)
+commission_per_contract = 0.62   # per side, commission + exchange fees; check your own rate
+
+[ibkr]
+host = "127.0.0.1"
+port = 7497               # 7497 = TWS paper, 4002 = IB Gateway paper (7496 / 4001 are live)
+client_id = 17
+account = ""              # leave empty to use the only account on the login
+allow_live = false        # must be true AND --live passed before a non-paper account is traded
